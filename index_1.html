@@ -1,0 +1,599 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="Jana Ahmed Abuelhaag: data science, machine learning and data engineering portfolio.">
+<title>Jana Abuelhaag Data Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Schibsted+Grotesk:wght@400;500;600;700;800&display=swap">
+<style>
+/* Layout concept: a dataset catalog. Projects are rows in a sortable table, a live clustering lab sits beside it, the career is a filterable log. Navy and teal come from her CV. */
+:root{
+  --bg:#F3F6F9; --surface:#FFFFFF; --ink:#0E1C2B; --muted:#52667A; --line:#D5DEE7;
+  --brand:#17365D; --accent:#126B78; --accent-ink:#FFFFFF; --accent-soft:#E2F0F2;
+  --code-key:#126B78; --code-str:#9A4A12; --code-num:#2B5FB5;
+  --c1:#126B78; --c2:#C2530C; --c3:#5B49B8; --c4:#B27A0A; --c5:#2A6BD6; --c6:#B02F78;
+  --font-display:"Schibsted Grotesk",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --font-body:"Schibsted Grotesk",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --font-data:"IBM Plex Mono",ui-monospace,"SF Mono",Menlo,Consolas,monospace;
+  --radius:10px;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#0B1520; --surface:#111F2D; --ink:#E5EDF5; --muted:#92A5B8; --line:#233446;
+    --brand:#A9C4E6; --accent:#52B8C8; --accent-ink:#04161B; --accent-soft:#12303A;
+    --code-key:#52B8C8; --code-str:#E3A26B; --code-num:#8DB4F0;
+    --c1:#52B8C8; --c2:#F08A4B; --c3:#A596F0; --c4:#E2B04A; --c5:#79A8F5; --c6:#EE7DB4;
+    color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#0B1520; --surface:#111F2D; --ink:#E5EDF5; --muted:#92A5B8; --line:#233446;
+  --brand:#A9C4E6; --accent:#52B8C8; --accent-ink:#04161B; --accent-soft:#12303A;
+  --code-key:#52B8C8; --code-str:#E3A26B; --code-num:#8DB4F0;
+  --c1:#52B8C8; --c2:#F08A4B; --c3:#A596F0; --c4:#E2B04A; --c5:#79A8F5; --c6:#EE7DB4;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--font-body);font-size:16px;line-height:1.55;padding-inline:clamp(16px,4vw,48px);padding-block:0 64px}
+.wrap{max-width:1120px;margin-inline:auto}
+a{color:var(--accent);text-underline-offset:3px}
+a:hover{text-decoration-thickness:2px}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:4px}
+button{font:inherit;color:inherit}
+h1,h2,h3{font-family:var(--font-display);text-wrap:balance;line-height:1.1;margin:0}
+.mono{font-family:var(--font-data)}
+.label{font-family:var(--font-data);font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+
+/* top bar */
+.bar{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--bg);border-bottom:1px solid var(--line);margin-inline:calc(-1*clamp(16px,4vw,48px));padding-inline:clamp(16px,4vw,48px)}
+.bar-in{max-width:1120px;margin-inline:auto;display:flex;align-items:center;justify-content:space-between;gap:16px;padding-block:12px}
+.brand{font-weight:700;color:var(--brand);text-decoration:none;white-space:nowrap}
+.nav{display:flex;gap:4px;align-items:center;flex-wrap:wrap;justify-content:flex-end}
+.nav a{color:var(--muted);text-decoration:none;font-size:14px;padding:6px 10px;border-radius:6px}
+.nav a:hover{color:var(--ink);background:var(--accent-soft)}
+.theme{border:1px solid var(--line);background:var(--surface);border-radius:6px;padding:5px 10px;font-size:13px;cursor:pointer;font-family:var(--font-data)}
+.theme:hover{border-color:var(--accent)}
+@media (max-width:640px){.nav a.hide-s{display:none}}
+
+/* hero */
+.hero{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr);gap:40px;align-items:center;padding-block:56px 48px}
+@media (max-width:860px){.hero{grid-template-columns:minmax(0,1fr);gap:28px;padding-block:36px 32px}}
+.hero h1{font-size:clamp(38px,6vw,68px);font-weight:800;letter-spacing:-.02em;color:var(--brand)}
+.hero .role{font-size:clamp(18px,2.2vw,22px);margin:14px 0 0;color:var(--accent);font-weight:600}
+.hero p.lede{max-width:56ch;margin:18px 0 0;color:var(--ink)}
+.hero .meta{display:flex;flex-wrap:wrap;gap:8px;margin-top:22px}
+.pill{font-family:var(--font-data);font-size:12.5px;border:1px solid var(--line);background:var(--surface);padding:5px 10px;border-radius:999px;color:var(--muted)}
+.pill.on{border-color:var(--accent);color:var(--accent);background:var(--accent-soft)}
+.cta{display:flex;flex-wrap:wrap;gap:10px;margin-top:24px}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:10px 16px;border-radius:8px;border:1px solid var(--accent);background:var(--accent);color:var(--accent-ink);text-decoration:none;font-weight:600;font-size:15px;cursor:pointer}
+.btn:hover{filter:brightness(1.08)}
+.btn.ghost{background:transparent;color:var(--accent)}
+.btn.ghost:hover{background:var(--accent-soft);filter:none}
+
+.record{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden}
+.record-top{display:flex;justify-content:space-between;align-items:center;padding:10px 14px;border-bottom:1px solid var(--line);background:var(--bg)}
+.dots{display:flex;gap:6px}.dots i{width:9px;height:9px;border-radius:50%;background:var(--line);display:block}
+.record pre{margin:0;padding:16px 16px 18px;font-family:var(--font-data);font-size:13px;line-height:1.7;overflow-x:auto;color:var(--ink)}
+.k{color:var(--code-key)}.s{color:var(--code-str)}.n{color:var(--code-num)}
+
+/* sections */
+section{padding-block:44px;border-top:1px solid var(--line);scroll-margin-top:64px}
+.sec-head{display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:8px 24px;margin-bottom:22px}
+.sec-head h2{font-size:clamp(26px,3.4vw,36px);font-weight:700;letter-spacing:-.01em}
+.sec-head p{margin:0;color:var(--muted);max-width:60ch;font-size:15px}
+
+/* controls */
+.controls{display:flex;flex-wrap:wrap;gap:10px 16px;align-items:center;margin-bottom:14px}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chip{font-family:var(--font-data);font-size:12.5px;padding:6px 11px;border-radius:999px;border:1px solid var(--line);background:var(--surface);color:var(--muted);cursor:pointer}
+.chip:hover{border-color:var(--accent);color:var(--ink)}
+.chip[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+.sort{display:flex;align-items:center;gap:8px;margin-left:auto}
+.sort select{font-family:var(--font-data);font-size:12.5px;background:var(--surface);color:var(--ink);border:1px solid var(--line);border-radius:6px;padding:6px 8px}
+.active-tool{display:flex;align-items:center;gap:8px;margin-bottom:12px;min-height:30px}
+
+/* catalog table */
+.table{border:1px solid var(--line);border-radius:var(--radius);background:var(--surface);overflow:hidden}
+.cols{display:grid;grid-template-columns:minmax(0,1.7fr) minmax(0,.9fr) minmax(0,.7fr) minmax(0,1.6fr) minmax(0,1.1fr) 28px;gap:16px;align-items:start}
+.thead{padding:10px 18px;border-bottom:1px solid var(--line);background:var(--bg)}
+.row{border-bottom:1px solid var(--line)}
+.row:last-child{border-bottom:0}
+.row-head{width:100%;text-align:left;background:transparent;border:0;padding:16px 18px;cursor:pointer}
+.row-head:hover{background:var(--accent-soft)}
+.row .name{font-weight:600}
+.row .src{display:block;font-family:var(--font-data);font-size:12px;color:var(--muted);margin-top:2px}
+.tag{display:inline-block;font-family:var(--font-data);font-size:12px;padding:2px 8px;border-radius:4px;background:var(--accent-soft);color:var(--accent);white-space:nowrap}
+.rec{font-family:var(--font-data);font-variant-numeric:tabular-nums}
+.dim{color:var(--muted)}
+.caret{transition:transform .15s;color:var(--muted);justify-self:end}
+.row-head[aria-expanded="true"] .caret{transform:rotate(90deg)}
+.row-body{padding:4px 18px 20px;display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);gap:20px 32px}
+.row-body[hidden]{display:none}
+.row-body p{margin:0 0 10px}
+.row-body ul{margin:0;padding-left:18px}
+.row-body li{margin-bottom:4px}
+.tools{display:flex;flex-wrap:wrap;gap:6px}
+.is-hidden{display:none}
+.empty{padding:28px 18px;color:var(--muted)}
+.mlabel{display:none}
+@media (max-width:860px){
+  .thead{display:none}
+  .cols{grid-template-columns:minmax(0,1fr) 28px;gap:8px 12px}
+  .cols>.c-task,.cols>.c-rec,.cols>.c-models,.cols>.c-metric{grid-column:1}
+  .cols>.caret{grid-column:2;grid-row:1}
+  .mlabel{display:inline;font-family:var(--font-data);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin-right:8px}
+  .row-body{grid-template-columns:minmax(0,1fr)}
+}
+
+/* lab */
+.lab{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,.75fr);gap:20px}
+@media (max-width:860px){.lab{grid-template-columns:minmax(0,1fr)}}
+.panel{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:16px}
+.panel h3{font-size:16px;font-weight:600;margin-bottom:4px}
+.panel .sub{margin:0 0 12px;color:var(--muted);font-size:14px}
+canvas{display:block;width:100%;border-radius:8px;background:var(--bg);border:1px solid var(--line);touch-action:none}
+.kctl{display:flex;flex-wrap:wrap;gap:12px 16px;align-items:center;margin-top:14px}
+.kctl label{font-family:var(--font-data);font-size:13px}
+.kctl input[type=range]{accent-color:var(--accent);width:min(220px,100%);min-width:0}
+.readout{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin-top:14px}
+.stat{border:1px solid var(--line);border-radius:8px;padding:10px 12px;background:var(--bg)}
+.stat b{display:block;font-family:var(--font-data);font-size:20px;font-weight:500;font-variant-numeric:tabular-nums}
+.stat span{font-family:var(--font-data);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.note{font-size:13px;color:var(--muted);margin:12px 0 0}
+svg text{font-family:var(--font-data);font-size:10px;fill:var(--muted)}
+.ax{stroke:var(--line);stroke-width:1}
+.grid{stroke:var(--line);stroke-width:1;stroke-dasharray:3 4}
+.curve{fill:none;stroke:var(--accent);stroke-width:2}
+.pt{fill:var(--surface);stroke:var(--accent);stroke-width:2}
+.pt.cur{fill:var(--accent);stroke:var(--accent)}
+.area{fill:var(--accent-soft)}
+svg text.cur{fill:var(--ink);font-weight:500}
+
+/* stack */
+.stack{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:14px}
+.group{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:16px}
+.group h3{font-size:14px;font-family:var(--font-data);font-weight:500;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin-bottom:12px}
+.tool{display:inline-flex;align-items:center;gap:6px;font-family:var(--font-data);font-size:13px;padding:5px 10px;border-radius:6px;border:1px solid var(--line);background:var(--bg);color:var(--ink);margin:0 6px 6px 0}
+button.tool{cursor:pointer}
+button.tool:hover{border-color:var(--accent)}
+button.tool[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+.tool em{font-style:normal;font-size:11px;opacity:.75}
+.tool.plain{color:var(--muted)}
+
+/* path */
+.log{border:1px solid var(--line);border-radius:var(--radius);background:var(--surface);overflow:hidden}
+.entry{display:grid;grid-template-columns:170px minmax(0,1fr);gap:8px 24px;padding:16px 18px;border-bottom:1px solid var(--line);transition:opacity .15s}
+.entry:last-child{border-bottom:0}
+.entry.off{opacity:.3}
+.entry .when{font-family:var(--font-data);font-size:13px;color:var(--muted);font-variant-numeric:tabular-nums}
+.entry h3{font-size:17px;font-weight:600}
+.entry .org{color:var(--accent);font-size:14px;margin:2px 0 6px}
+.entry p{margin:0;font-size:15px}
+@media (max-width:640px){.entry{grid-template-columns:minmax(0,1fr)}}
+
+/* contact */
+.contact{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:20px}
+@media (max-width:760px){.contact{grid-template-columns:minmax(0,1fr)}}
+.mailbox{display:flex;align-items:center;gap:10px;flex-wrap:wrap;border:1px solid var(--line);border-radius:8px;padding:10px 12px;background:var(--bg);margin-top:12px}
+.mailbox code{font-family:var(--font-data);font-size:14px;overflow-wrap:anywhere;min-width:0;user-select:all}
+.toast{font-family:var(--font-data);font-size:12px;color:var(--accent);min-height:18px;margin-top:8px}
+.links{display:flex;flex-direction:column;gap:8px;margin-top:12px}
+.links a{display:flex;justify-content:space-between;gap:12px;padding:10px 12px;border:1px solid var(--line);border-radius:8px;text-decoration:none;background:var(--bg);color:var(--ink)}
+.links a:hover{border-color:var(--accent)}
+.links a span:last-child{font-family:var(--font-data);font-size:13px;color:var(--accent);overflow-wrap:anywhere;text-align:right}
+footer{padding-top:28px;border-top:1px solid var(--line);color:var(--muted);font-size:13px;font-family:var(--font-data)}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
+</style>
+</head>
+<body>
+
+<div class="bar"><div class="bar-in">
+  <a class="brand" href="#top">Jana Abuelhaag</a>
+  <nav class="nav" aria-label="Sections">
+    <a href="#projects">Projects</a><a href="#lab">Lab</a><a href="#stack" class="hide-s">Stack</a><a href="#path" class="hide-s">Path</a><a href="#contact">Contact</a>
+    <button class="theme" id="theme" type="button" aria-label="Switch color theme">theme</button>
+  </nav>
+</div></div>
+
+<div class="wrap" id="top">
+  <header class="hero">
+    <div>
+      <div class="label">Data science · Machine learning · Data engineering</div>
+      <h1 style="margin-top:14px">Jana Ahmed Abuelhaag</h1>
+      <p class="role">I build models on real datasets and the pipelines around them.</p>
+      <p class="lede">Software Engineering student at Egyptian Chinese University with three internships: machine learning, data science and DevOps. My largest dataset so far has 580K+ records. Below you can sort my projects, filter them by tool, and run a clustering experiment yourself.</p>
+      <div class="meta">
+        <span class="pill">Cairo, Egypt</span>
+        <span class="pill on">Open to freelance data work</span>
+        <span class="pill">GPA 3.93 / 4.0</span>
+      </div>
+      <div class="cta">
+        <a class="btn" href="#projects">Browse projects</a>
+        <a class="btn ghost" href="#contact">Get in touch</a>
+      </div>
+    </div>
+    <div class="record" aria-label="Profile summary as a JSON record">
+      <div class="record-top"><div class="dots"><i></i><i></i><i></i></div><span class="label">profile.json</span></div>
+<pre><span class="k">{</span>
+  <span class="k">"name"</span>: <span class="s">"Jana Ahmed Abuelhaag"</span>,
+  <span class="k">"focus"</span>: [<span class="s">"machine learning"</span>,
+            <span class="s">"data science"</span>,
+            <span class="s">"data engineering"</span>],
+  <span class="k">"education"</span>: {
+    <span class="k">"school"</span>: <span class="s">"Egyptian Chinese University"</span>,
+    <span class="k">"degree"</span>: <span class="s">"Bachelor of Software Engineering"</span>,
+    <span class="k">"expected"</span>: <span class="n">2028</span>,
+    <span class="k">"gpa"</span>: <span class="n">3.93</span>
+  },
+  <span class="k">"internships"</span>: <span class="n">3</span>,
+  <span class="k">"largest_dataset"</span>: <span class="s">"580K+ rows"</span>,
+  <span class="k">"best_reported_accuracy"</span>: <span class="n">0.86</span>
+<span class="k">}</span></pre>
+    </div>
+  </header>
+
+  <section id="projects">
+    <div class="sec-head">
+      <h2>Datasets and models</h2>
+      <p>Each row is a project. Select a row for the approach and stack. A dash means the number was not recorded for that project.</p>
+    </div>
+    <div class="controls">
+      <div class="chips" id="taskChips" role="group" aria-label="Filter by task"></div>
+      <label class="sort label" for="sort">Sort
+        <select id="sort">
+          <option value="records">Records, high to low</option>
+          <option value="name">Name</option>
+          <option value="task">Task</option>
+        </select>
+      </label>
+    </div>
+    <div class="active-tool" id="activeTool" aria-live="polite"></div>
+    <div class="table">
+      <div class="cols thead label" aria-hidden="true">
+        <span>Project</span><span>Task</span><span>Records</span><span>Models</span><span>Reported metric</span><span></span>
+      </div>
+      <div id="rows"></div>
+    </div>
+  </section>
+
+  <section id="lab">
+    <div class="sec-head">
+      <h2>Clustering lab</h2>
+      <p>I used KMeans with the elbow and silhouette methods for customer segmentation. This is the same idea on synthetic data you control.</p>
+    </div>
+    <div class="lab">
+      <div class="panel">
+        <h3>KMeans on 240 synthetic points</h3>
+        <p class="sub">Four groups were generated. Choose how many clusters KMeans should look for.</p>
+        <canvas id="cv" width="640" height="420" role="img" aria-label="Scatter plot of synthetic points colored by KMeans cluster"></canvas>
+        <div class="kctl">
+          <label for="k">Clusters (k): <b id="kval" class="mono">4</b></label>
+          <input id="k" type="range" min="1" max="6" step="1" value="4">
+          <button class="chip" id="regen" type="button">New dataset</button>
+        </div>
+        <div class="readout">
+          <div class="stat"><b id="rK">4</b><span>k</span></div>
+          <div class="stat"><b id="rI">-</b><span>inertia</span></div>
+          <div class="stat"><b id="rS">-</b><span>silhouette</span></div>
+        </div>
+        <p class="note" id="verdict"></p>
+      </div>
+      <div class="panel">
+        <h3>Elbow curve</h3>
+        <p class="sub">Inertia drops as k grows. Look for where the drop flattens.</p>
+        <svg id="elbow" viewBox="0 0 320 230" width="100%" role="img" aria-label="Elbow curve of inertia against number of clusters"></svg>
+        <p class="note">Synthetic data, regenerated in your browser. Best of 6 random starts per k. Silhouette ranges from -1 to 1, higher is better separated.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="stack">
+    <div class="sec-head">
+      <h2>Stack</h2>
+      <p>Tools with a number are used in at least one project above. Select one to filter the catalog.</p>
+    </div>
+    <div class="stack" id="stackGrid"></div>
+  </section>
+
+  <section id="path">
+    <div class="sec-head">
+      <h2>Path</h2>
+      <p>Filter the log by area.</p>
+    </div>
+    <div class="controls"><div class="chips" id="lensChips" role="group" aria-label="Filter by area"></div></div>
+    <div class="log" id="log"></div>
+  </section>
+
+  <section id="contact">
+    <div class="sec-head">
+      <h2>Contact</h2>
+      <p>For internships, junior roles and freelance data projects.</p>
+    </div>
+    <div class="contact">
+      <div class="panel">
+        <h3>Email</h3>
+        <div class="mailbox"><code id="mail">janaelhaag@gmail.com</code><button class="chip" id="copy" type="button">Copy</button></div>
+        <div class="toast" id="toast" role="status"></div>
+      </div>
+      <div class="panel">
+        <h3>Profiles</h3>
+        <div class="links">
+          <a href="https://www.linkedin.com/in/jana-abou-el-haag" target="_blank" rel="noopener"><span>LinkedIn</span><span>linkedin.com/in/jana-abou-el-haag</span></a>
+          <a href="https://github.com/jenna-ahmed" target="_blank" rel="noopener"><span>GitHub</span><span>github.com/jenna-ahmed</span></a>
+        </div>
+      </div>
+    </div>
+  </section>
+  <footer>Jana Ahmed Abuelhaag · Cairo, Egypt</footer>
+</div>
+
+<script>
+(function(){
+"use strict";
+/* ---------- data ---------- */
+var PROJECTS=[
+ {id:"forest",name:"Forest cover type classification",src:"Elevvo · ML internship · Nov-Dec 2025",task:"Classification",records:580000,recLabel:"580K+",
+  models:"Random Forest, XGBoost",metric:"-",tools:["Python","scikit-learn","XGBoost"],
+  what:"Trained classifiers to predict forest cover type on 580K+ records. The largest dataset in this portfolio.",
+  points:["Compared a bagged-tree model (Random Forest) with gradient boosting (XGBoost)","Public repository: forest-cover-type-classification"]},
+ {id:"genre",name:"Music genre classification",src:"Elevvo · ML internship · Nov-Dec 2025",task:"Classification",records:null,recLabel:"-",
+  models:"Random Forest, CNN",metric:"86% accuracy",tools:["Python","scikit-learn","Keras"],
+  what:"Classified music genre two ways: tabular audio features with Random Forest, and spectrogram images with a CNN.",
+  points:["86% accuracy reported","Two input representations of the same audio problem","Public repository: music-genre-classification"]},
+ {id:"seg",name:"Customer segmentation",src:"Elevvo · ML internship · Nov-Dec 2025",task:"Clustering",records:null,recLabel:"-",
+  models:"KMeans, DBSCAN",metric:"Elbow, silhouette",tools:["Python","scikit-learn"],
+  what:"Segmented customers with KMeans and DBSCAN and chose cluster counts with the elbow and silhouette methods.",
+  points:["Centroid-based and density-based clustering side by side","Try the same method in the lab above"]},
+ {id:"churn",name:"Customer churn pipeline",src:"Misr Technology Services · Data science internship · Aug-Sep 2025",task:"Classification",records:10000,recLabel:"10K+",
+  models:"Logistic Regression, Random Forest, XGBoost, LightGBM, SVM",metric:"ROC-AUC, F1-score",tools:["Python","scikit-learn","XGBoost","LightGBM"],
+  what:"End-to-end churn pipeline on 10K+ records: exploratory data analysis, feature engineering, class balancing with SMOTE, then a five-model benchmark.",
+  points:["Benchmarked five model families on the same split","Scored with ROC-AUC and F1-score, which suit imbalanced classes","SMOTE used to rebalance the minority class"]},
+ {id:"startup",name:"Startup profitability model",src:"Misr Technology Services · Data science internship · Aug-Sep 2025",task:"Regression",records:null,recLabel:"-",
+  models:"Regression model",metric:"-",tools:["Python"],
+  what:"Regression model for startup profitability with serialized preprocessing, so the same transforms run again at inference time.",
+  points:["Preprocessing saved with the model for reusable inference"]},
+ {id:"backup",name:"MySQL backup and restore across two VMs",src:"Misr Technology Services · DevOps internship · 2026",task:"Data engineering",records:null,recLabel:"-",
+  models:"mysqldump, scp, rsync",metric:"Verified by queries",tools:["MySQL","SQL","Bash","Linux"],
+  what:"Created a database on one Linux VM, took a mysqldump backup, moved it with scp and rsync, restored it on a second VM and checked the result with queries.",
+  points:["Two VMs on KVM/libvirt","Bash scripts for dated backups and resource reports","Verification queries compared source and restored data"]},
+ {id:"compose",name:"Spring Boot and PostgreSQL stack",src:"Misr Technology Services · DevOps internship · 2026",task:"Data engineering",records:null,recLabel:"-",
+  models:"Docker Compose",metric:"-",tools:["Docker","Docker Compose","PostgreSQL"],
+  what:"Containerized a Spring Boot app with a PostgreSQL database in Docker Compose, with persistent volumes, versioned images on Docker Hub and a rollback path.",
+  points:["Database data kept in volumes, separate from the container","Versioned image tags to roll back a release"]}
+];
+var TASKS=["All","Classification","Regression","Clustering","Data engineering"];
+var GROUPS=[
+ {name:"Languages",tools:["Python","SQL","Bash","C++"]},
+ {name:"Data and analysis",tools:["NumPy","pandas","Matplotlib","Seaborn","Jupyter Notebook","Google Colab"]},
+ {name:"Machine learning",tools:["scikit-learn","XGBoost","LightGBM","Keras"]},
+ {name:"Data infrastructure",tools:["MySQL","PostgreSQL","Docker","Docker Compose","Linux","GitLab CI/CD"]}
+];
+var PATH=[
+ {when:"Aug 2026 - Sep 2026",title:"DevOps Intern",org:"Misr Technology Services (MTS)",lens:["Infrastructure","Data"],
+  text:"Linux, Bash, SSH and virtual machines. MySQL backup and restore, Docker Compose with PostgreSQL, and GitLab CI/CD pipelines for a Spring Boot and Angular banking platform."},
+ {when:"2026",title:"Data Engineering track",org:"DEPI",lens:["Data"],
+  text:"Enrolled in the Digital Egypt Pioneers Initiative data engineering track, alongside the internship."},
+ {when:"Dec 2025 - Present",title:"President, Microsoft Student Club",org:"Egyptian Chinese University",lens:["Leadership"],
+  text:"Leads the student technology community and organized 3 online workshops on Azure, GitHub Copilot and Git."},
+ {when:"Nov 2025 - Dec 2025",title:"Machine Learning Intern",org:"Elevvo (Remote)",lens:["Data"],
+  text:"Built 5 ML models across regression, classification, clustering and time-series forecasting. 86% accuracy on music genre classification. Forest cover classification on 580K+ records."},
+ {when:"Aug 2025 - Sep 2025",title:"Data Science Intern",org:"Misr Technology Services (MTS)",lens:["Data"],
+  text:"Churn pipeline on 10K+ records with EDA, feature engineering and SMOTE, benchmarking five models on ROC-AUC and F1-score. Startup profitability regression model."},
+ {when:"Oct 2024 - Present",title:"Technical Instructor",org:"ICPC ECU",lens:["Leadership"],
+  text:"Taught 2 introductory C++ courses to 70+ students: fundamentals, OOP and problem solving."},
+ {when:"Aug 2023 - Jul 2028 (expected)",title:"Bachelor of Software Engineering",org:"Egyptian Chinese University",lens:["Data","Leadership","Infrastructure"],
+  text:"GPA 3.93 / 4.0. Ranked 1st in Year 1 and 5th in Year 2. Coursework: data structures, algorithms, operating systems, databases, compilers."}
+];
+var LENSES=["All","Data","Infrastructure","Leadership"];
+
+/* ---------- theme ---------- */
+var root=document.documentElement,themeBtn=document.getElementById("theme");
+function isDark(){var t=root.getAttribute("data-theme");if(t)return t==="dark";return window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches}
+function paintThemeBtn(){themeBtn.textContent=isDark()?"light":"dark"}
+try{var saved=localStorage.getItem("jana-theme");if(saved==="light"||saved==="dark")root.setAttribute("data-theme",saved)}catch(e){}
+paintThemeBtn();
+themeBtn.addEventListener("click",function(){
+  var next=isDark()?"light":"dark";root.setAttribute("data-theme",next);
+  try{localStorage.setItem("jana-theme",next)}catch(e){}
+  paintThemeBtn();drawCanvas();
+});
+if(window.matchMedia){var mq=window.matchMedia("(prefers-color-scheme: dark)");(mq.addEventListener?mq.addEventListener.bind(mq,"change"):mq.addListener.bind(mq))(function(){paintThemeBtn();drawCanvas()})}
+
+/* ---------- catalog ---------- */
+var state={task:"All",tool:null,sort:"records",open:null};
+function esc(s){return String(s).replace(/[&<>"]/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]})}
+function toolCount(t){return PROJECTS.filter(function(p){return p.tools.indexOf(t)>-1}).length}
+function renderChips(){
+  var box=document.getElementById("taskChips");
+  box.innerHTML=TASKS.map(function(t){
+    var n=t==="All"?PROJECTS.length:PROJECTS.filter(function(p){return p.task===t}).length;
+    return '<button type="button" class="chip" data-task="'+esc(t)+'" aria-pressed="'+(state.task===t)+'">'+esc(t)+' '+n+'</button>';
+  }).join("");
+}
+function visible(){
+  var list=PROJECTS.filter(function(p){
+    return (state.task==="All"||p.task===state.task)&&(!state.tool||p.tools.indexOf(state.tool)>-1);
+  });
+  list.sort(function(a,b){
+    if(state.sort==="name")return a.name.localeCompare(b.name);
+    if(state.sort==="task")return a.task.localeCompare(b.task)||a.name.localeCompare(b.name);
+    var ar=a.records==null?-1:a.records,br=b.records==null?-1:b.records;
+    return br-ar||a.name.localeCompare(b.name);
+  });
+  return list;
+}
+function renderRows(){
+  var list=visible(),box=document.getElementById("rows");
+  if(!list.length){box.innerHTML='<div class="empty">No project matches this filter. Clear the tool or pick another task.</div>';return}
+  box.innerHTML=list.map(function(p){
+    var open=state.open===p.id;
+    return '<div class="row">'+
+     '<button type="button" class="row-head cols" data-id="'+p.id+'" aria-expanded="'+open+'" aria-controls="b-'+p.id+'">'+
+       '<span class="c-name"><span class="name">'+esc(p.name)+'</span><span class="src">'+esc(p.src)+'</span></span>'+
+       '<span class="c-task"><span class="mlabel">Task</span><span class="tag">'+esc(p.task)+'</span></span>'+
+       '<span class="c-rec rec'+(p.records?'':' dim')+'"><span class="mlabel">Records</span>'+esc(p.recLabel)+'</span>'+
+       '<span class="c-models"><span class="mlabel">Models</span>'+esc(p.models)+'</span>'+
+       '<span class="c-metric'+(p.metric==="-"?' dim':'')+'"><span class="mlabel">Metric</span>'+esc(p.metric)+'</span>'+
+       '<span class="caret" aria-hidden="true">&#9656;</span>'+
+     '</button>'+
+     '<div class="row-body" id="b-'+p.id+'"'+(open?'':' hidden')+'>'+
+       '<div><p>'+esc(p.what)+'</p><ul>'+p.points.map(function(x){return '<li>'+esc(x)+'</li>'}).join("")+'</ul></div>'+
+       '<div><div class="label" style="margin-bottom:8px">Stack</div><div class="tools">'+p.tools.map(function(t){return '<span class="tool plain">'+esc(t)+'</span>'}).join("")+'</div></div>'+
+     '</div></div>';
+  }).join("");
+}
+function renderActive(){
+  var box=document.getElementById("activeTool");
+  box.innerHTML=state.tool?'<span class="label">Filtered by tool</span><button type="button" class="chip" id="clearTool" aria-label="Clear tool filter">'+esc(state.tool)+' &times;</button>':"";
+}
+function renderStack(){
+  document.getElementById("stackGrid").innerHTML=GROUPS.map(function(g){
+    return '<div class="group"><h3>'+esc(g.name)+'</h3>'+g.tools.map(function(t){
+      var n=toolCount(t);
+      return n?'<button type="button" class="tool" data-tool="'+esc(t)+'" aria-pressed="'+(state.tool===t)+'">'+esc(t)+' <em>'+n+'</em></button>'
+              :'<span class="tool plain">'+esc(t)+'</span>';
+    }).join("")+'</div>';
+  }).join("");
+}
+function refresh(){renderChips();renderRows();renderActive();renderStack()}
+document.getElementById("taskChips").addEventListener("click",function(e){var b=e.target.closest("[data-task]");if(!b)return;state.task=b.getAttribute("data-task");refresh()});
+document.getElementById("sort").addEventListener("change",function(e){state.sort=e.target.value;renderRows()});
+document.getElementById("rows").addEventListener("click",function(e){
+  var b=e.target.closest("[data-id]");if(!b)return;var id=b.getAttribute("data-id");state.open=state.open===id?null:id;renderRows();
+  var nb=document.querySelector('[data-id="'+id+'"]');if(nb)nb.focus();
+});
+document.getElementById("activeTool").addEventListener("click",function(e){if(e.target.closest("#clearTool")){state.tool=null;refresh()}});
+document.getElementById("stackGrid").addEventListener("click",function(e){
+  var b=e.target.closest("[data-tool]");if(!b)return;var t=b.getAttribute("data-tool");state.tool=state.tool===t?null:t;state.task="All";
+  refresh();
+  if(state.tool)document.getElementById("projects").scrollIntoView({behavior:window.matchMedia("(prefers-reduced-motion: reduce)").matches?"auto":"smooth",block:"start"});
+});
+
+/* ---------- path ---------- */
+var lens="All";
+function renderLens(){document.getElementById("lensChips").innerHTML=LENSES.map(function(l){return '<button type="button" class="chip" data-lens="'+l+'" aria-pressed="'+(lens===l)+'">'+l+'</button>'}).join("")}
+function renderPath(){
+  document.getElementById("log").innerHTML=PATH.map(function(p){
+    var on=lens==="All"||p.lens.indexOf(lens)>-1;
+    return '<div class="entry'+(on?'':' off')+'"><div class="when">'+esc(p.when)+'</div><div><h3>'+esc(p.title)+'</h3><div class="org">'+esc(p.org)+'</div><p>'+esc(p.text)+'</p></div></div>';
+  }).join("");
+}
+document.getElementById("lensChips").addEventListener("click",function(e){var b=e.target.closest("[data-lens]");if(!b)return;lens=b.getAttribute("data-lens");renderLens();renderPath()});
+
+/* ---------- clustering lab ---------- */
+var N_PER=60,KMAX=6,seed=7,DATA=[],RESULTS=[],cv=document.getElementById("cv"),ctx=cv.getContext("2d");
+function rng(s){return function(){s|=0;s=s+0x6D2B79F5|0;var t=Math.imul(s^s>>>15,1|s);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296}}
+function gauss(r){var u=0,v=0;while(!u)u=r();v=r();return Math.sqrt(-2*Math.log(u))*Math.cos(2*Math.PI*v)}
+function makeData(sd){
+  var r=rng(sd),c=[[.26,.3],[.72,.27],[.3,.74],[.76,.72]],pts=[];
+  c.forEach(function(m){var cx=m[0]+(r()-.5)*.1,cy=m[1]+(r()-.5)*.1;for(var i=0;i<N_PER;i++)pts.push([cx+gauss(r)*.075,cy+gauss(r)*.075])});
+  return pts;
+}
+function d2(a,b){var x=a[0]-b[0],y=a[1]-b[1];return x*x+y*y}
+function kmeansOnce(pts,k,r){
+  var cent=[pts[Math.floor(r()*pts.length)].slice()];
+  while(cent.length<k){
+    var dist=pts.map(function(p){return Math.min.apply(null,cent.map(function(c){return d2(p,c)}))}),sum=dist.reduce(function(a,b){return a+b},0),t=r()*sum,acc=0,idx=0;
+    for(var i=0;i<dist.length;i++){acc+=dist[i];if(acc>=t){idx=i;break}}
+    cent.push(pts[idx].slice());
+  }
+  var labels=new Array(pts.length).fill(-1);
+  for(var it=0;it<50;it++){
+    var changed=false;
+    pts.forEach(function(p,i){var best=0,bd=Infinity;cent.forEach(function(c,j){var d=d2(p,c);if(d<bd){bd=d;best=j}});if(labels[i]!==best){labels[i]=best;changed=true}});
+    cent=cent.map(function(c,j){var xs=0,ys=0,n=0;pts.forEach(function(p,i){if(labels[i]===j){xs+=p[0];ys+=p[1];n++}});return n?[xs/n,ys/n]:c});
+    if(!changed)break;
+  }
+  var inertia=0;pts.forEach(function(p,i){inertia+=d2(p,cent[labels[i]])});
+  return {labels:labels,cent:cent,inertia:inertia};
+}
+function silhouette(pts,labels,k){
+  if(k<2)return null;
+  var sums=[],total=0;
+  for(var i=0;i<pts.length;i++){
+    var sd=new Array(k).fill(0),cn=new Array(k).fill(0);
+    for(var j=0;j<pts.length;j++){if(i===j)continue;var d=Math.sqrt(d2(pts[i],pts[j]));sd[labels[j]]+=d;cn[labels[j]]++}
+    var li=labels[i],a=cn[li]?sd[li]/cn[li]:0,b=Infinity;
+    for(var c=0;c<k;c++){if(c!==li&&cn[c])b=Math.min(b,sd[c]/cn[c])}
+    total+=cn[li]?(b-a)/Math.max(a,b):0;
+  }
+  return total/pts.length;
+}
+function compute(){
+  DATA=makeData(seed);RESULTS=[];
+  for(var k=1;k<=KMAX;k++){
+    var best=null;
+    for(var s=0;s<6;s++){var r=kmeansOnce(DATA,k,rng(seed*100+k*10+s));if(!best||r.inertia<best.inertia)best=r}
+    best.sil=silhouette(DATA,best.labels,k);RESULTS[k]=best;
+  }
+}
+function cssVar(n){return getComputedStyle(root).getPropertyValue(n).trim()}
+function drawCanvas(){
+  var k=+document.getElementById("k").value,res=RESULTS[k];if(!res)return;
+  var w=cv.clientWidth||640,h=Math.round(w*.66),dpr=window.devicePixelRatio||1;
+  cv.width=Math.round(w*dpr);cv.height=Math.round(h*dpr);cv.style.height=h+"px";
+  ctx.setTransform(dpr,0,0,dpr,0,0);ctx.clearRect(0,0,w,h);
+  var pad=14,X=function(v){return pad+v*(w-2*pad)},Y=function(v){return pad+(1-v)*(h-2*pad)};
+  var line=cssVar("--line"),ink=cssVar("--ink"),surface=cssVar("--surface");
+  ctx.strokeStyle=line;ctx.lineWidth=1;ctx.setLineDash([3,5]);
+  for(var g=1;g<4;g++){ctx.beginPath();ctx.moveTo(X(g/4),pad);ctx.lineTo(X(g/4),h-pad);ctx.moveTo(pad,Y(g/4));ctx.lineTo(w-pad,Y(g/4));ctx.stroke()}
+  ctx.setLineDash([]);
+  DATA.forEach(function(p,i){ctx.fillStyle=cssVar("--c"+(res.labels[i]%6+1));ctx.globalAlpha=.82;ctx.beginPath();ctx.arc(X(p[0]),Y(p[1]),4.2,0,Math.PI*2);ctx.fill()});
+  ctx.globalAlpha=1;
+  res.cent.forEach(function(c,j){
+    var x=X(c[0]),y=Y(c[1]);ctx.fillStyle=surface;ctx.strokeStyle=cssVar("--c"+(j%6+1));ctx.lineWidth=3;
+    ctx.beginPath();ctx.arc(x,y,9,0,Math.PI*2);ctx.fill();ctx.stroke();
+    ctx.strokeStyle=ink;ctx.lineWidth=1.5;ctx.beginPath();ctx.moveTo(x-4,y);ctx.lineTo(x+4,y);ctx.moveTo(x,y-4);ctx.lineTo(x,y+4);ctx.stroke();
+  });
+}
+function drawElbow(k){
+  var W=320,H=230,L=44,R=14,T=14,B=44,svg=document.getElementById("elbow");
+  var maxI=RESULTS[1].inertia,top=Math.ceil(maxI/5)*5||5;
+  var X=function(i){return L+(i-1)*(W-L-R)/(KMAX-1)},Y=function(v){return T+(1-v/top)*(H-T-B)};
+  var s="";
+  [0,.5,1].forEach(function(f){var v=top*f;s+='<line class="grid" x1="'+L+'" x2="'+(W-R)+'" y1="'+Y(v)+'" y2="'+Y(v)+'"/><text x="'+(L-6)+'" y="'+(Y(v)+3)+'" text-anchor="end">'+v.toFixed(v%1?1:0)+'</text>'});
+  s+='<line class="ax" x1="'+L+'" x2="'+L+'" y1="'+T+'" y2="'+(H-B)+'"/><line class="ax" x1="'+L+'" x2="'+(W-R)+'" y1="'+(H-B)+'" y2="'+(H-B)+'"/>';
+  var pts=[],area='M'+X(1)+' '+Y(0);
+  for(var i=1;i<=KMAX;i++){pts.push(X(i)+','+Y(RESULTS[i].inertia));area+=' L'+X(i)+' '+Y(RESULTS[i].inertia)}
+  area+=' L'+X(KMAX)+' '+Y(0)+' Z';
+  s+='<path class="area" d="'+area+'"/><polyline class="curve" points="'+pts.join(" ")+'"/>';
+  for(var j=1;j<=KMAX;j++){
+    s+='<circle class="pt'+(j===k?' cur':'')+'" cx="'+X(j)+'" cy="'+Y(RESULTS[j].inertia)+'" r="'+(j===k?6:4)+'"/>';
+    s+='<text x="'+X(j)+'" y="'+(H-B+16)+'" text-anchor="middle"'+(j===k?' class="cur"':'')+'>'+j+'</text>';
+  }
+  s+='<text x="'+((L+W-R)/2)+'" y="'+(H-8)+'" text-anchor="middle">k (number of clusters)</text>';
+  s+='<text x="12" y="'+((T+H-B)/2)+'" text-anchor="middle" transform="rotate(-90 12 '+((T+H-B)/2)+')">inertia</text>';
+  svg.innerHTML=s;
+}
+function updateLab(){
+  var k=+document.getElementById("k").value,res=RESULTS[k];
+  document.getElementById("kval").textContent=k;
+  document.getElementById("rK").textContent=k;
+  document.getElementById("rI").textContent=res.inertia.toFixed(2);
+  document.getElementById("rS").textContent=res.sil==null?"n/a":res.sil.toFixed(2);
+  var bk=2,bs=-2;for(var i=2;i<=KMAX;i++){if(RESULTS[i].sil>bs){bs=RESULTS[i].sil;bk=i}}
+  document.getElementById("verdict").textContent="Highest silhouette on this dataset: k = "+bk+" ("+bs.toFixed(2)+"). The data was generated with 4 groups."+(k===bk?" You are on it.":"");
+  drawElbow(k);drawCanvas();
+}
+document.getElementById("k").addEventListener("input",updateLab);
+document.getElementById("regen").addEventListener("click",function(){seed=(seed*31+11)%9973;compute();updateLab()});
+var rz;window.addEventListener("resize",function(){clearTimeout(rz);rz=setTimeout(drawCanvas,120)});
+
+/* ---------- contact ---------- */
+document.getElementById("copy").addEventListener("click",function(){
+  var t=document.getElementById("mail").textContent,toast=document.getElementById("toast");
+  function sel(){var r=document.createRange();r.selectNodeContents(document.getElementById("mail"));var s=window.getSelection();s.removeAllRanges();s.addRange(r);toast.textContent="Selected. Press copy on your device."}
+  if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(t).then(function(){toast.textContent="Copied."},sel)}else{sel()}
+});
+
+/* ---------- boot ---------- */
+refresh();renderLens();renderPath();compute();updateLab();
+})();
+</script>
+
+</body>
+</html>
